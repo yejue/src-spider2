@@ -51,11 +51,11 @@ $ python manage.py runserver 0:8000
 
 ```json
 {
-    data: [
-        {title: "清华大学", url: "https://www.tsinghua.edu.cn/"}
+    "data": [
+        {"title": "清华大学", "url": "https://www.tsinghua.edu.cn/"}
     ],
-    message: "成功",
-    result_code: "200"
+    "message": "成功",
+    "result_code": "200"
 }
 ```
 
@@ -92,11 +92,11 @@ $ python manage.py runserver 0:8000
 
 ```json
 {
-    data: [
-        {title: "清华大学", url: "https://www.tsinghua.edu.cn/"}
+    "data": [
+        {"title": "清华大学", "url": "https://www.tsinghua.edu.cn/"}
     ],
-    message: "成功",
-    result_code: "200"
+    "message": "成功",
+    "result_code": "200"
 }
 ```
 
