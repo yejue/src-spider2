@@ -4,6 +4,8 @@
 
 python3.10、ubuntu2204
 
+（python 最低需要 python3.8）
+
 ## 二、快速启动
 
 1. 安装所有依赖包，`pip install -r requirements.txt`
