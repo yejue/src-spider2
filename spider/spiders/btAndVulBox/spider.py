@@ -1,9 +1,13 @@
 import re
 import json
 import requests
+import urllib3
 
 from bs4 import BeautifulSoup
 from . import constants
+
+
+urllib3.disable_warnings()  # 关闭 WARNING
 
 
 class BtAndVulBoxMsgSpider:
@@ -96,7 +100,7 @@ class BtAndVulBoxMsgSpider:
                 "company_name": item["task_title"],
                 "origin": "漏洞盒子",
                 "origin_url": detail_url,
-                "property": property_,
+                "property_range": property_,
             }
             res_list.append(temp)
 
@@ -108,5 +112,5 @@ class BtAndVulBoxMsgSpider:
 
         for mission in mission_list:
             temp = mission()
-            res_list.append(temp)
+            res_list.extend(temp)
         return res_list
