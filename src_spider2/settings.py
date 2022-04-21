@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'apps.spider',  # 爬虫接口视图
     'apps.toolman',  # 命令执行工具人
+    'apps.apiv1',  # API 接口聚合
 ]
 
 MIDDLEWARE = [
