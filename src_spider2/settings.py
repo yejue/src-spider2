@@ -138,6 +138,9 @@ LOGGING = {
         'simple': {
             'format': '%(levelname)s %(module)s %(lineno)d %(message)s'
         },
+        "spider": {
+            "format": "%(levelname)s %(asctime)s %(message)s"
+        }
     },
     'filters': {
         'require_debug_true': {
@@ -179,7 +182,7 @@ LOGGING = {
             'maxBytes': 300 * 1024 * 1024,
             # 日志文件个数
             'backupCount': 10,
-            'formatter': 'simple'
+            'formatter': 'spider'
         },
     },
     'loggers': {
