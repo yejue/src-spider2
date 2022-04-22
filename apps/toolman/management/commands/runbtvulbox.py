@@ -20,7 +20,6 @@ class Command(BaseCommand):
         res_list = spider.run_all_mission()
 
         for item in res_list:
-            print(item)
             queryset = BtAndVulBoxModel.objects.filter(company_name=item["company_name"], origin=item["origin"])
             if queryset:
                 queryset.update(**item)
