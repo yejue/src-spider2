@@ -1,7 +1,12 @@
+import logging
+
 from django.core.management import BaseCommand
 
 from spider.spiders import BtAndVulBoxMsgSpider
 from apps.spider.models import BtAndVulBoxModel
+
+
+logger = logging.getLogger("spider")  # 爬虫日志器
 
 
 class Command(BaseCommand):
@@ -23,3 +28,4 @@ class Command(BaseCommand):
                 queryset.create(**item)
 
         print(f"补天&漏洞盒子爬虫任务完成")
+        logger.info(f"补天&漏洞盒子爬虫任务完成")

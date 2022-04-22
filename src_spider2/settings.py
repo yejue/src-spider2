@@ -124,3 +124,79 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# 日志器
+LOGGING = {
+    # 版本
+    'version': 1,
+    # 是否禁用已存在的日志器
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s module:%(module)s lineno:%(lineno)d %(message)s'
+        },
+        'simple': {
+            'format': '%(levelname)s %(module)s %(lineno)d %(message)s'
+        },
+    },
+    'filters': {
+        'require_debug_true': {
+            '()': 'django.utils.log.RequireDebugTrue',
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'filters': ['require_debug_true'],
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple'
+        },
+        'file': {
+            'level': 'INFO',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': Path(BASE_DIR).joinpath("logs/operations.log"),  # 日志文件的位置，必须先手动创建这个logs文件夹
+            # 单个日志文件最大字节数
+            'maxBytes': 300 * 1024 * 1024,
+            # 日志文件个数
+            'backupCount': 10,
+            'formatter': 'verbose'
+        },
+        'file2': {
+            'level': 'INFO',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': Path(BASE_DIR).joinpath("logs/system.log"),  # 日志文件的位置，必须先手动创建这个logs文件夹
+            # 单个日志文件最大字节数
+            'maxBytes': 300 * 1024 * 1024,
+            # 日志文件个数
+            'backupCount': 10,
+            'formatter': 'verbose'
+        },
+        'file3': {
+            'level': 'INFO',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': Path(BASE_DIR).joinpath("logs/spider.log"),  # 日志文件的位置，必须先手动创建这个logs文件夹
+            # 单个日志文件最大字节数
+            'maxBytes': 300 * 1024 * 1024,
+            # 日志文件个数
+            'backupCount': 10,
+            'formatter': 'simple'
+        },
+    },
+    'loggers': {
+        'operations': {
+            'handlers': ['console', 'file'],
+            'propagate': True,
+            'level': 'INFO',
+        },
+        'system': {
+            'handlers': ['console', 'file2'],
+            'propagate': True,
+            'level': 'INFO',
+        },
+        'spider': {
+            'handlers': ['console', 'file3'],
+            'propagate': True,
+            'level': 'INFO',
+        },
+    }
+}
