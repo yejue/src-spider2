@@ -18,5 +18,6 @@ class BtAndVulBoxModel(BaseModel):
 
     class Meta:
         db_table = "bt_vulbox_table"
+        ordering = ["id"]
         verbose_name = "补天&漏洞盒子信息表"
         verbose_name_plural = "补天&漏洞盒子信息表"
