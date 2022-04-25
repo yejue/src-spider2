@@ -4,6 +4,7 @@ Brotli==1.0.9
 certifi==2021.10.8
 charset-normalizer==2.0.12
 Django==4.0.4
+django-cors-headers==3.11.0
 idna==3.3
 PySocks==1.7.1
 requests==2.27.1

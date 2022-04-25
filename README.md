@@ -11,7 +11,8 @@ python3.10、ubuntu2204
 ## 二、快速启动
 
 1. 安装所有依赖包，`pip install -r requirements.txt`
-2. 进入 src-spider2 项目目录，使用下列命令启动服务。
+2. 进入 src-spider2 项目目录，创建 logs 文件目录。
+3. 在 src-spider2 项目目录，使用下列命令启动服务。
 
 ```shell
 $ python manage.py runserver 0:8000  

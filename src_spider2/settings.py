@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'apps.spider',  # 爬虫接口视图
     'apps.toolman',  # 命令执行工具人
     'apps.apiv1',  # API 接口聚合
+    'corsheaders',  # 跨域配置 APP
 ]
 
 MIDDLEWARE = [
@@ -203,3 +204,17 @@ LOGGING = {
         },
     }
 }
+
+
+# 跨域组件设置 (白名单、请求方法、请求头)
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ALLOW_METHODS = ["GET", "POST", "DELETE", "PUT"]
+
+CORS_ALLOW_HEADERS = [
+    "XMLHttpRequest", "X_FILENAME", "accept-encoding", "authorization", "content-type",
+    "dnt", "origin", "user-agent", "x-csrftoken", "x-requested-with", "Pragma"
+]
