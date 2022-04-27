@@ -6,4 +6,5 @@ app_name = "spider"
 urlpatterns = [
     path('baidu-search/', views.BaiduSearchSpiderView.as_view(), name="baidu_spider"),
     path('google-search/', views.GoogleSearchSpiderView.as_view(), name="google_spider"),
+    path('td-search/', views.TideFingerSearchSpiderView.as_view(), name="td_spider"),
 ]
