@@ -266,29 +266,56 @@ data 数据按照源数据格式返回，下列返回示例严格遵循 JSON 规
 
 ```json
 {
-    "result_code": "200",
+    "result_code": "200", 
     "message": "成功", 
     "data": {
         "url": "http://baidu.com", 
         "title": "", 
-        "middleware": "Apache", 
-        "cms": "[]", 
-        "banner": "{\"URL Redirect\":[\"http_status:200, Title:\\u767e\\u5ea6\\u4e00\\u4e0b\\uff0c\\u4f60\\u5c31\\u77e5\\u9053, IP:110.242.68.4, HTTPServer:BWS\\/1.1\",\"http_status:200, Title:\\u767e\\u5ea6\\u4e00\\u4e0b\\uff0c\\u4f60\\u5c31\\u77e5\\u9053, IP:110.242.68.4, HTTPServer:Apache\"]}", 
+        "middleware": "Apache",
+        "cms": [], 
+        "banner": {
+            "URL Redirect": [
+                "http_status:200, Title:百度一下，你就知道, IP:110.242.68.4, HTTPServer:BWS/1.1", 
+                "http_status:200, Title:百度一下，你就知道, IP:110.242.68.4, HTTPServer:Apache"
+            ]
+        }, 
         "ip_message": {
             "ip": "220.181.38.148", 
             "isp": "电信IDC机房", 
             "area": "北京市", 
             "gps": "116.40387397,39.91488908"
         }, 
-        "cdn": "{\"cdn\": \"UnKownCdn\", \"cdn_cname\": \"\"}", "os": "\"Linux\"", 
+        "cdn": {"cdn": "UnKownCdn", "cdn_cname": ""}, 
+        "os": "Linux", 
         "domain_msg": {
             "domain_register": "MarkMonitor, Inc.", 
             "whois_server": "whois.markmonitor.com", 
-            "domain_reg_date": ["1999, 10, 11, 11, 5, 17", "1999, 10, 11, 11, 5, 17, tzinfo=datetime.timezone.utc"], 
-            "domain_exp_date": ["2026, 10, 11, 11, 5, 17", "2026, 10, 11, 7, 0, tzinfo=datetime.timezone.utc"], 
-            "name_servers": ["NS1.BAIDU.COM", "NS2.BAIDU.COM", "NS3.BAIDU.COM", "NS4.BAIDU.COM", "NS7.BAIDU.COM", "ns2.baidu.com", "ns3.baidu.com", "ns7.baidu.com", "ns4.baidu.com", "ns1.baidu.com"], "emails": ["abusecomplaints@markmonitor.com", "whoisrequest@markmonitor.com"], 
+            "domain_reg_date": [
+                "1999, 10, 11, 11, 5, 17", 
+                "1999, 10, 11, 11, 5, 17, tzinfo=datetime.timezone.utc"
+            ], 
+            "domain_exp_date": [
+                "2026, 10, 11, 11, 5, 17",
+                "2026, 10, 11, 7, 0, tzinfo=datetime.timezone.utc"
+            ], 
+            "name_servers": [
+                "NS1.BAIDU.COM", 
+                "NS2.BAIDU.COM", 
+                "NS3.BAIDU.COM", 
+                "NS4.BAIDU.COM", 
+                "NS7.BAIDU.COM", 
+                "ns2.baidu.com", 
+                "ns3.baidu.com", 
+                "ns7.baidu.com", 
+                "ns4.baidu.com", 
+                "ns1.baidu.com"
+            ], 
+            "emails": [
+                "abusecomplaints@markmonitor.com", 
+                "whoisrequest@markmonitor.com"
+            ], 
             "state": "Beijing"
-        },
+        }, 
         "domain_record": {
             "company": "北京百度网讯科技有限公司", 
             "property": "企业", 
@@ -299,8 +326,6 @@ data 数据按照源数据格式返回，下列返回示例严格遵循 JSON 规
     }
 }
 ```
-
-#### 
 
 ## 四、暂定错误码
 
@@ -313,7 +338,7 @@ data 数据按照源数据格式返回，下列返回示例严格遵循 JSON 规
 
 ## 五、爬虫任务
 1. 补天和漏洞盒子数据获取任务
-  `python manage.py runbtvulbox`
+    `python manage.py runbtvulbox`
 
 2. 潮汐在线指纹识别爬虫 Cookie 维护任务（建议 30 分钟维护一次）
 

@@ -29,8 +29,8 @@ class TdFingerSearchSpider:
             "url": res["url"],
             "title": json.loads(res["finger"])["title"],  # 网站标题
             "middleware": json.loads(res["finger"])["httpserver"],  # 中间件
-            "cms": res["cms"],  # CMS 信息
-            "banner": res["banner"],  # Banner 信息
+            "cms": json.loads(res["cms"]),  # CMS 信息
+            "banner": json.loads(res["banner"]),  # Banner 信息
 
             "ip_message": {  # IP 地址信息
                 "ip": res["ip"],
@@ -39,8 +39,8 @@ class TdFingerSearchSpider:
                 "gps": json.loads(res["ip_gps_info"])["gps"],
             },
 
-            "cdn": res["cdn"],  # CDN 信息
-            "os": res["os"],  # 操作系统信息
+            "cdn": json.loads(res["cdn"]),  # CDN 信息
+            "os": json.loads(res["os"]),  # 操作系统信息
 
             "domain_msg": {  # 域名信息
                 "domain_register": json.loads(res["domain_whois"])["reg"],  # 域名注册商
