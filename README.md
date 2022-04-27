@@ -338,12 +338,12 @@ data 数据按照源数据格式返回，下列返回示例严格遵循 JSON 规
 
 ## 五、爬虫任务
 1. 补天和漏洞盒子数据获取任务
-    
-`python manage.py runbtvulbox`
-    
-2. 潮汐在线指纹识别爬虫 Cookie 维护任务（建议 30 分钟维护一次）
 
-    `python manage.py maintainTdCookie`
+   `python manage.py runbtvulbox`
+    
+3. 潮汐在线指纹识别爬虫 Cookie 维护任务（建议 30 分钟维护一次）
+
+   `python manage.py maintainTdCookie`
 
 ## 六、补天&漏洞盒子爬虫描述
 ### 6.1 数据表模型
