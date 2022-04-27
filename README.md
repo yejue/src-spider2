@@ -22,6 +22,7 @@ $ python manage.py runserver 0:8000
 ```
 3. 通过提供的接口获取数据或启动即时爬虫（非即时爬虫都采用命令启动）
 4. 通过提供的爬虫任务命令更新或爬取数据
+5. 通过提供的任务命令维护某些爬虫的 Cookie
 
 ## 三、接口设计
 
@@ -117,7 +118,7 @@ $ python manage.py runserver 0:8000
 
 请求示例： /api/bt-vulbox/?page=1&limit=25
 
-接口备注： 补天和漏洞盒子信息展示接口。可使用 page 和 limit 参数进行结果过滤。
+接口备注： 补天和漏洞盒子信息展示接口。可使用 page 和 limit 参数进行结果过滤。（支持使用表字段进行结果过滤）
 
 ------
 
@@ -208,6 +209,97 @@ $ python manage.py runserver 0:8000
 }
 ```
 
+#### 3.5 潮汐在线指纹识别搜索爬虫
+
+接口地址：/spider/td-search/
+
+返回格式：json
+
+请求方式：get
+
+请求示例： /spider/td-search/?domain=baidu.com
+
+接口备注： 潮汐在线指纹识别搜索爬虫，可传入一个参数，暂无过滤参数。
+
+------
+
+参数说明：
+
+| 名称   | 必须性 | 类型   | 描述                                   | 默认值 |
+| ------ | ------ | ------ | -------------------------------------- | ------ |
+| domain | 是     | string | 搜索关键词，可以由多个词组成，支持空格 | 无     |
+
+返回参数说明：
+
+| 名称        | 类型   | 说明                         |
+| ----------- | ------ | ---------------------------- |
+| result_code | string | 返回状态码                   |
+| message     | string | 状态码对应信息，或自定义信息 |
+| data        | dict   | 搜索结果数据字典             |
+
+data 数据说明:
+
+data 数据按照源数据格式返回，下列返回示例严格遵循 JSON 规范，故省略类型说明。
+
+| 参数            | 描述                                                         |
+| --------------- | ------------------------------------------------------------ |
+| url             | url                                                          |
+| title           | 目标网站标题                                                 |
+| middleware      | 中间件。在此表示反向代理引擎（NGINX 等）                     |
+| cms             | cms 信息                                                     |
+| banner          | banner 信息                                                  |
+| ip_message      | ip 信息，包含ip，ISP机房信息，地址，GPS信息                  |
+| cdn             | CDN 信息                                                     |
+| os              | 操作系统信息                                                 |
+| domain_msg      | 域名信息。包含域名注册商，whois 服务器，域名注册与过期时间等 |
+| domain_register | 域名注册商                                                   |
+| whois_server    | whois 服务器                                                 |
+| domain_reg_date | 域名注册时间                                                 |
+| domain_exp_date | 域名过期时间                                                 |
+| name_servers    | DNS 服务器列表                                               |
+| domain_record   | 域名备案信息                                                 |
+| property        | 备案性质，个人或者企业                                       |
+| number          | 备案号                                                       |
+| title           | 备案标题                                                     |
+
+返回参数示例：
+
+```json
+{
+    "result_code": "200",
+    "message": "成功", 
+    "data": {
+        "url": "http://baidu.com", 
+        "title": "", 
+        "middleware": "Apache", 
+        "cms": "[]", 
+        "banner": "{\"URL Redirect\":[\"http_status:200, Title:\\u767e\\u5ea6\\u4e00\\u4e0b\\uff0c\\u4f60\\u5c31\\u77e5\\u9053, IP:110.242.68.4, HTTPServer:BWS\\/1.1\",\"http_status:200, Title:\\u767e\\u5ea6\\u4e00\\u4e0b\\uff0c\\u4f60\\u5c31\\u77e5\\u9053, IP:110.242.68.4, HTTPServer:Apache\"]}", 
+        "ip_message": {
+            "ip": "220.181.38.148", 
+            "isp": "电信IDC机房", 
+            "area": "北京市", 
+            "gps": "116.40387397,39.91488908"
+        }, 
+        "cdn": "{\"cdn\": \"UnKownCdn\", \"cdn_cname\": \"\"}", "os": "\"Linux\"", 
+        "domain_msg": {
+            "domain_register": "MarkMonitor, Inc.", 
+            "whois_server": "whois.markmonitor.com", 
+            "domain_reg_date": ["1999, 10, 11, 11, 5, 17", "1999, 10, 11, 11, 5, 17, tzinfo=datetime.timezone.utc"], 
+            "domain_exp_date": ["2026, 10, 11, 11, 5, 17", "2026, 10, 11, 7, 0, tzinfo=datetime.timezone.utc"], 
+            "name_servers": ["NS1.BAIDU.COM", "NS2.BAIDU.COM", "NS3.BAIDU.COM", "NS4.BAIDU.COM", "NS7.BAIDU.COM", "ns2.baidu.com", "ns3.baidu.com", "ns7.baidu.com", "ns4.baidu.com", "ns1.baidu.com"], "emails": ["abusecomplaints@markmonitor.com", "whoisrequest@markmonitor.com"], 
+            "state": "Beijing"
+        },
+        "domain_record": {
+            "company": "北京百度网讯科技有限公司", 
+            "property": "企业", 
+            "number": "", 
+            "title": "百度", 
+            "time": "2022-03-11"
+        }
+    }
+}
+```
+
 #### 
 
 ## 四、暂定错误码
@@ -221,7 +313,11 @@ $ python manage.py runserver 0:8000
 
 ## 五、爬虫任务
 1. 补天和漏洞盒子数据获取任务
-`python manage.py runbtvulbox`
+  `python manage.py runbtvulbox`
+
+2. 潮汐在线指纹识别爬虫 Cookie 维护任务（建议 30 分钟维护一次）
+
+  `python manage.py maintainTdCookie`
 
 ## 六、补天&漏洞盒子爬虫描述
 ### 6.1 数据表模型
