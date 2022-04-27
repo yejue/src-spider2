@@ -2,7 +2,7 @@ class Code:
     OK = "200"
 
     PARAM_ERR = "4001"
-    CONNECT_ERR = ""
+    CONNECT_ERR = "5001"
     UNKNOWN_ERR = "-1"
 
 
