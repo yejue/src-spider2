@@ -62,6 +62,7 @@ class ChinaZPingSpider:
 
     def run(self):
         """爬虫开启"""
-        loop = asyncio.get_event_loop()
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
         res = loop.run_until_complete(self.get_ping_all())
         return res
