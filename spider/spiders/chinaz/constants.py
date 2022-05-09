@@ -1,7 +1,10 @@
 import json
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent
 
 # GUID PING 测试站点列表
-with open("config.json") as f:
+with open(f"{BASE_DIR}/config.json") as f:
     GUID_LIST = json.loads(f.read())["guid_list"]
 
 # HEADERS
