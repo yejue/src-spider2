@@ -46,16 +46,12 @@ class ChinaZPingSpider:
         done, _ = await asyncio.wait(task_list)
 
         # 过滤重复 IP
-        ip_set = set()
+        ip_list = list(set([i.result() for i in done if i.result()]))
 
-        for i in done:
-            if i.result():
-                ip_set.add(i.result())
-
-        # 格式化将要返回的数据
+        # 序列化将要返回的数据
         data = {
-            "ip_list": list(ip_set),
-            "ip_count": len(ip_set)
+            "ip_list": ip_list,
+            "ip_count": len(ip_list)
         }
 
         return data
